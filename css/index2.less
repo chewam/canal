@@ -1,0 +1,101 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:800italic,400);
+@bgColors: #435a6b, #f19f0f, #0e83cd, #3fa46a, #cd4436, #9e487f, #16a085, #2ac56c, #aab7b7, #30abd5, #ed4e6e;
+
+@color: #000000;
+@baseColor: #000000;
+
+@cellWidth: 150px;
+@cellHeigth: 150px;
+@gridWidth: @cellWidth * 8 + 10 * 2;
+@gridHeigth: @cellHeigth * 4 + 10 * 2;
+
+.loop (@i) when (@i > 0) {
+    // @p: (@i + 1) / 16;
+    .color@{i} {
+        // background-color: extract(@bgColors, @i);
+        border: 10px solid extract(@bgColors, @i);
+        // background-color: lighten(@baseColor,  percentage(@p) );
+    }
+    .loop (@i - 1);
+}
+
+.loop (0) {}
+ 
+.loop (16);
+
+/***********/
+
+body {
+    background-color: #F5F5F5;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.header {
+    color: white;
+    padding: 50px 30px;
+    background-color: @baseColor;
+
+    h1 {
+        margin: 0;
+        padding: 0;
+        font-weight: 800;
+        text-align: right;
+        font-style: italic;
+        line-height: 30px;
+        text-transform: uppercase;
+        // text-shadow: 1px 1px 1px rgba(255,255,255,0.7);
+    }
+}
+
+.grid {
+    border: 10px solid white;
+    width: @gridWidth;
+    height: @gridHeigth;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.cell {
+    float: left;
+    -webkit-perspective: 1000;
+
+    .wrap {
+        position: relative;
+        -webkit-transition: 0.6s;
+        -webkit-transform-style: preserve-3d;
+
+        .front {
+            z-index: 2;
+            background-repeat: no-repeat;
+            background-size: @gridWidth @gridHeigth;
+        }
+
+        .back {
+            padding: 5px;
+            // font-size: .9em;
+            color: white;
+            // border: 8px solid lighten(@color, 30%);
+            // color: lighten(@color, 45%);
+            -webkit-transform: rotateY(180deg);
+            // background-color: lighten(@color, 30%);
+            background-color: #000000;
+        }
+
+        .front, .back {
+            top: 0;
+            left: 0;
+            position: absolute;
+            outline: 1px solid white;
+            -webkit-backface-visibility: hidden;
+        }
+
+        &.flip {
+            -webkit-transform: rotateY(180deg);
+        }
+    }
+
+    &, .front, .back {
+        width: @cellWidth;
+        height: @cellHeigth;
+    }
+
+}
