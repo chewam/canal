@@ -1,4 +1,5 @@
-app.directive('grid', ['dataManager', 'data', '$rootScope', function(dataManager, data, $rootScope) {
+
+app.directive('grid', ['data', '$rootScope', function(data, $rootScope) {
 
     var el,
         rowCount = 4,
@@ -24,7 +25,10 @@ app.directive('grid', ['dataManager', 'data', '$rootScope', function(dataManager
             '<div class="cell" ng:repeat="item in items" style="width:{{cellWidth}}%;" ng:click="onCellClick(item)">',
                 '<div class="wrap" ng:class="{flip: item.flip}">',
                     '<div class="front" style="background-image: url({{backgroundImage}}); background-position: -{{item.x}}px -{{item.y}}px; background-size: {{imgWidth}}px {{imgHeight}}px;"></div>',
-                    '<div class="back color{{$index + 1}}" >{{item.name}}</div>',
+                    '<div class="back color{{$index + 1}}">',
+                        '<div>{{item.name}}</div>',
+                        '<div class="glyphicon glyphicon-glass"></div>',
+                    '</div>',
                 '</div>',
             '</div>'
         ].join(''),

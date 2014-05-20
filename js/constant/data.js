@@ -4,15 +4,20 @@ app.constant('data', {
 	    "name": "Gift 1",
 	    "img":"http://placehold.it/250x250"
 	}, {
-	    "name": "Gift 2"
+	    "name": "Gift 2",
+	    "img":"http://placehold.it/230x250"
 	}, {
-	    "name": "Gift 3"
+	    "name": "Gift 3",
+	    "img":"http://placehold.it/250x230"
 	}, {
-	    "name": "Gift 4"
+	    "name": "Gift 4",
+	    "img":"http://placehold.it/250x250"
 	}, {
-	    "name": "Gift 5"
+	    "name": "Gift 5",
+	    "img":"http://placehold.it/250x250"
 	}, {
-	    "name": "Gift 6"
+	    "name": "Gift 6",
+	    "img":"http://placehold.it/250x250"
 	}, {
 	    "name": "Gift 7"
 	}, {

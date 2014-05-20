@@ -4,52 +4,22 @@ app.constant('gameConfig', {
     date: '06/22/2014 12:00'
 });
 
-app.service('anim', ['timeManager', '$rootScope', function(timeManager, $rootScope) {
-    window.requestAnimFrame = (function(){
-      return  window.requestAnimationFrame       ||
-              window.webkitRequestAnimationFrame ||
-              window.mozRequestAnimationFrame    ||
-              function( callback ){
-                window.setTimeout(callback, 1000 / 60);
-              };
-    })();
-    var an =  function(){
-        requestAnimFrame(an);
-        if (!$rootScope.$$phase){
-            $rootScope.$apply(function(){
-                var time = timeManager.getTime();
-
-                $rootScope.days = time.days;
-                $rootScope.hours = time.hours;
-                $rootScope.minutes = time.minutes;
-                $rootScope.secondes = time.secondes;
-            });
-        }
-    }
-
-    return { start: function() {
-       an();
-    }}
- }]);
-
-
-
-app.service('dataManager', ['$http', function($http) {
+// app.service('dataManager', ['$http', function($http) {
     
-    return {
-        getItems: function() {
-            return $http({
-                method: 'GET',
-                responseType: 'json',
-                url: './data/items.json',
-                header: {
-                    'Content-Type': 'application/json; charset=utf-8'
-                }
-            });
-        }
-    };
+//     return {
+//         getItems: function() {
+//             return $http({
+//                 method: 'GET',
+//                 responseType: 'json',
+//                 url: './data/items.json',
+//                 header: {
+//                     'Content-Type': 'application/json; charset=utf-8'
+//                 }
+//             });
+//         }
+//     };
 
-}]);
+// }]);
 
 app.service('timeManager', ['gameConfig', function(gameConfig) {
 
@@ -62,37 +32,80 @@ app.service('timeManager', ['gameConfig', function(gameConfig) {
                 days = parseInt(diff/(24*3600)),
                 hours = parseInt( (diff - (days*24*3600))/3600 ),
                 minutes = parseInt( (diff - (days*24*3600) - (hours*3600)) /60 );
-                secondes = parseInt( (diff - (days*24*3600) - (hours*3600) - (minutes*60)) );
+                seconds = parseInt( (diff - (days*24*3600) - (hours*3600) - (minutes*60)) );
 
 
             return {
                 days: days,
                 hours: hours,
                 minutes: minutes,
-                secondes: secondes
+                seconds: seconds
             };
         }
     };
 
 }]);
 
-app.directive('time', ['anim', function( anim) {
+app.service('anim', ['timeManager', '$rootScope', function(timeManager, $rootScope) {
 
-    var link = function($scope, $rootScope) {
+    window.requestAnimFrame = (function() {
+        return  window.requestAnimationFrame ||
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame ||
+            function(callback) {
+                window.setTimeout(callback, 1000 / 60);
+            };
+    })();
+
+    var anim = function() {
+        var time;
+
+        requestAnimFrame(anim);
+
+        if (!$rootScope.$$phase) {
+
+            $rootScope.$apply(function() {
+                time = timeManager.getTime();
+                $rootScope.timeItems[0].value = time.days;
+                $rootScope.timeItems[1].value = time.hours;
+                $rootScope.timeItems[2].value = time.minutes;
+                $rootScope.timeItems[3].value = time.seconds;
+            });
+
+        }
+    };
+
+    return {start: anim};
+
+}]);
+
+app.directive('time', ['anim', function(anim) {
+
+    var link = function(scope) {
+        scope.timeItems = [{
+            value: 0,
+            name: 'jours'
+        }, {
+            value: 0,
+            name: 'heures'
+        }, {
+            value: 0,
+            name: 'minutes'
+        }, {
+            value: 0,
+            name: 'secondes'
+        }];
 
         anim.start();
-        //requestAnimFrame(controller);
     };
 
     return {
         restrict: 'A',
         link: link,
         template: [
-            '<div>',
-                '<span>days: {{days}}, </span>',
-                '<span>hours: {{hours}}, </span>',
-                '<span>minutes: {{minutes}}, </span>',
-                '<span>secondes: {{secondes}}</span>',
+            '<div class="item" ng:repeat="item in timeItems">',
+                '<div class="value">{{item.value}}</div>',
+                '<div class="name">{{item.name}}</div>',
             '</div>'
         ].join('')
     };
