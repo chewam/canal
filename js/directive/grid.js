@@ -1,11 +1,10 @@
-app.directive('grid', ['dataManager', 'data', function(dataManager, data) {
+app.directive('grid', ['data', function(data) {
 
     var el,
         rowCount = 4,
         columnCount = 8;
 
     var onCellClick = function(item) {
-        //console.log('onCellClick');
         item.flip = !item.flip;
         // if (!item.flip) {
         //     item.flip = true;
@@ -21,7 +20,10 @@ app.directive('grid', ['dataManager', 'data', function(dataManager, data) {
             '<div class="cell" ng:repeat="item in items" style="width:{{cellWidth}}%;" ng:click="onCellClick(item)">',
                 '<div class="wrap" ng:class="{flip: item.flip}">',
                     '<div class="front" style="background-image: url({{backgroundImage}}); background-position: -{{item.x}}px -{{item.y}}px; background-size: {{imgWidth}}px {{imgHeight}}px;"></div>',
-                    '<div class="back color{{$index + 1}}" >{{item.name}}</div>',
+                    '<div class="back color{{$index + 1}}">',
+                        '<div>{{item.name}}</div>',
+                        '<div class="glyphicon glyphicon-glass"></div>',
+                    '</div>',
                 '</div>',
             '</div>'
         ].join(''),
