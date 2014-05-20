@@ -1,6 +1,6 @@
 app.directive('grid', ['dataManager', function(dataManager) {
 
-    console.log('grid', arguments);
+    //console.log('grid', arguments);
 
     var el,
         rowCount = 4,
@@ -9,7 +9,7 @@ app.directive('grid', ['dataManager', function(dataManager) {
         // cellHeight = 150;
 
     var onCellClick = function(item) {
-        console.log('onCellClick');
+        //console.log('onCellClick');
         item.flip = !item.flip;
         // if (!item.flip) {
         //     item.flip = true;
@@ -32,7 +32,7 @@ app.directive('grid', ['dataManager', function(dataManager) {
         ].join(''),
 
         controller: function($scope) {
-            console.log('controller', arguments);
+            //console.log('controller', arguments);
 
             // var width = window.innerWidth,
             //     height = window.innerHeight,
@@ -50,7 +50,7 @@ app.directive('grid', ['dataManager', function(dataManager) {
             // $scope.cellHeight = cellHeight;
 
             dataManager.getItems().success(function(items) {
-                console.log('getItems', arguments);
+                //console.log('getItems', arguments);
                 // imgWidth = grid.width;
                 // imgHeigth = grid.height;
                 var ratio, img = new Image();
@@ -59,7 +59,7 @@ app.directive('grid', ['dataManager', function(dataManager) {
 
                 img.onload = function() {
                     ratio = img.width / img.height;
-                    console.log('img', img.width, img.height, ratio, el.offsetWidth / ratio);
+                    //console.log('img', img.width, img.height, ratio, el.offsetWidth / ratio);
                 };
 
                 for (var i = 0; i < items.length; i++) {
@@ -73,7 +73,7 @@ app.directive('grid', ['dataManager', function(dataManager) {
 
         link: function(scope, elements) {
             el = elements[0];
-            console.log('link', arguments);
+            //console.log('link', arguments);
             var width = el.offsetWidth,
                 height = el.offsetHeight,
                 cellWidth = width / columnCount,
