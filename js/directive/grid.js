@@ -1,22 +1,3 @@
-var app = angular.module('game', []);
-
-app.service('dataManager', ['$http', function($http) {
-    
-    return {
-        getItems: function() {
-            return $http({
-                method: 'GET',
-                responseType: 'json',
-                url: './data/items.json',
-                header: {
-                    'Content-Type': 'application/json; charset=utf-8'
-                }
-            });
-        }
-    };
-
-}]);
-
 app.directive('grid', ['dataManager', function(dataManager) {
 
     console.log('grid', arguments);
@@ -28,6 +9,7 @@ app.directive('grid', ['dataManager', function(dataManager) {
         // cellHeight = 150;
 
     var onCellClick = function(item) {
+        console.log('onCellClick');
         item.flip = !item.flip;
         // if (!item.flip) {
         //     item.flip = true;
@@ -40,13 +22,13 @@ app.directive('grid', ['dataManager', function(dataManager) {
         restrict: 'A',
 
         template: [
-            '<div class="cell" ng:repeat="item in items" style="width: {{cellWidth}}%;">{{$index + 1}}</div>'
-            // '<div class="cell" ng:repeat="item in items" ng:click="onCellClick(item)">',
-            //     '<div class="wrap" ng:class="{flip: item.flip}">',
-            //         '<div class="front" style="background-image: url({{backgroundImage}}); background-position: -{{item.x}}px -{{item.y}}px;"></div>',
-            //         '<div class="back color{{$index + 1}}" >{{item.name}}</div>',
-            //     '</div>',
-            // '</div>'
+            // '<div class="cell" ng:repeat="item in items" style="width: {{cellWidth}}%;">{{$index + 1}}</div>'
+            '<div class="cell" ng:repeat="item in items" style="width:{{cellWidth}}%;" ng:click="onCellClick(item)">',
+                '<div class="wrap" ng:class="{flip: item.flip}">',
+                    '<div class="front" style="background-image: url({{backgroundImage}}); background-position: -{{item.x}}px -{{item.y}}px;"></div>',
+                    '<div class="back color{{$index + 1}}" >{{item.name}}</div>',
+                '</div>',
+            '</div>'
         ].join(''),
 
         controller: function($scope) {
@@ -59,7 +41,7 @@ app.directive('grid', ['dataManager', function(dataManager) {
             //     a = area / b;
             //     // side = Math.sqrt(width * height / 16);
 
-            // $scope.onCellClick = onCellClick;
+            $scope.onCellClick = onCellClick;
             // $scope.backgroundImage = backgroundImage;
             // $scope.columnWidth = b;
             // $scope.rowWidth = a;
@@ -69,10 +51,22 @@ app.directive('grid', ['dataManager', function(dataManager) {
 
             dataManager.getItems().success(function(items) {
                 console.log('getItems', arguments);
-                // for (var i = 0; i < items.length; i++) {
+                // imgWidth = grid.width;
+                // imgHeigth = grid.height;
+                var ratio, img = new Image();
+
+                img.src = './img/braquo02-01.jpg';
+
+                img.onload = function() {
+                    ratio = img.width / img.height;
+                    console.log('img', img.width, img.height, ratio, el.offsetWidth / ratio);
+                };
+
+                for (var i = 0; i < items.length; i++) {
+
                 //     items[i].x = i % columnCount * cellWidth; 
                 //     items[i].y = Math.floor(i / rowCount) * cellHeight;
-                // };
+                };
                 $scope.items = items;
             });
         },

@@ -1,23 +1,4 @@
-var app = angular.module('game', []);
-
-app.service('dataManager', ['$http', function($http) {
-    
-    return {
-        getItems: function() {
-            return $http({
-                method: 'GET',
-                responseType: 'json',
-                url: './data/items.json',
-                header: {
-                    'Content-Type': 'application/json; charset=utf-8'
-                }
-            });
-        }
-    };
-
-}]);
-
-app.directive('grid', ['dataManager', function(dataManager) {
+app.directive('gridstatic', ['dataManager', function(dataManager) {
 
     console.log('grid', arguments);
 
