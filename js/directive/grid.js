@@ -5,7 +5,7 @@ app.directive('grid', ['dataManager', 'data', function(dataManager, data) {
         columnCount = 8;
 
     var onCellClick = function(item) {
-        console.log('onCellClick');
+        //console.log('onCellClick');
         item.flip = !item.flip;
         // if (!item.flip) {
         //     item.flip = true;
@@ -27,15 +27,12 @@ app.directive('grid', ['dataManager', 'data', function(dataManager, data) {
         ].join(''),
 
         controller: function($scope) {
-            console.log('controller', arguments);
-
             $scope.onCellClick = onCellClick;
             $scope.backgroundImage = backgroundImage;
         },
 
         link: function(scope, elements) {
             el = elements[0];
-
             var items, offset,
                 ratio, img = new Image(),
                 width = el.offsetWidth,

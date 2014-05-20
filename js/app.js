@@ -1,8 +1,38 @@
 var app = angular.module('game', []);
 
 app.constant('gameConfig', {
-    date: '05/30/2014'
+    date: '06/22/2014 12:00'
 });
+
+app.service('anim', ['timeManager', '$rootScope', function(timeManager, $rootScope) {
+    window.requestAnimFrame = (function(){
+      return  window.requestAnimationFrame       ||
+              window.webkitRequestAnimationFrame ||
+              window.mozRequestAnimationFrame    ||
+              function( callback ){
+                window.setTimeout(callback, 1000 / 60);
+              };
+    })();
+    var an =  function(){
+        requestAnimFrame(an);
+        if (!$rootScope.$$phase){
+            $rootScope.$apply(function(){
+                var time = timeManager.getTime();
+
+                $rootScope.days = time.days;
+                $rootScope.hours = time.hours;
+                $rootScope.minutes = time.minutes;
+                $rootScope.secondes = time.secondes;
+            });
+        }
+    }
+
+    return { start: function() {
+       an();
+    }}
+ }]);
+
+
 
 app.service('dataManager', ['$http', function($http) {
     
@@ -22,91 +52,47 @@ app.service('dataManager', ['$http', function($http) {
 }]);
 
 app.service('timeManager', ['gameConfig', function(gameConfig) {
-    
-    var getHours = function(d1, d2, days) {
-        var t2 = d2.getTime();
-        var t1 = d1.getTime();
-        var d = days * 24 * 3600 * 1000;
-
-        console.log('days', d, t1, t2, t2 - t1);
-
-        var h = t2 - t1 - d;
-
-        return parseInt(h / (3600 * 1000));
-    };
-
-    var getDays = function(d1, d2) {
-        var t2 = d2.getTime();
-        var t1 = d1.getTime();
-
-        return parseInt((t2-t1)/(24*3600*1000));
-    };
-
-    var inWeeks = function(d1, d2) {
-        var t2 = d2.getTime();
-        var t1 = d1.getTime();
-
-        return parseInt((t2-t1)/(24*3600*1000*7));
-    };
-
-    var inMonths = function(d1, d2) {
-        var d1Y = d1.getFullYear();
-        var d2Y = d2.getFullYear();
-        var d1M = d1.getMonth();
-        var d2M = d2.getMonth();
-
-        return (d2M+12*d2Y)-(d1M+12*d1Y);
-    };
-
-    var inYears = function(d1, d2) {
-        return d2.getFullYear()-d1.getFullYear();
-    };
 
     return {
         getTime: function() {
 
             var d1 = new Date(),
                 d2 = new Date(gameConfig.date),
-                t1 = d1.getTime(),
-                t2 = d2.getTime(),
-                days = parseInt((t2-t1)/(24*3600*1000)),
-                hours = parseInt( (t2-t1-(days*24*3600*1000)) / (60*1000) ),
-                minutes = parseInt( (t2-t1-(days*24*3600*1000)-(hours*60*1000)) / 1000);
+                diff = ((d2.getTime() - d1.getTime())/1000),
+                days = parseInt(diff/(24*3600)),
+                hours = parseInt( (diff - (days*24*3600))/3600 ),
+                minutes = parseInt( (diff - (days*24*3600) - (hours*3600)) /60 );
+                secondes = parseInt( (diff - (days*24*3600) - (hours*3600) - (minutes*60)) );
 
-
-
-            // var d1 = new Date(),
-            //     d2 = new Date('05/30/2014'),
-            //     days = getDays(d1, d2),
-            //     hours = getHours(d1, d2, days);
 
             return {
                 days: days,
                 hours: hours,
-                minutes: minutes
+                minutes: minutes,
+                secondes: secondes
             };
         }
     };
 
 }]);
 
-app.directive('time', ['timeManager', function(timeManager) {
+app.directive('time', ['anim', function( anim) {
 
-    var controller = function($scope) {
-        var time = timeManager.getTime();
+    var link = function($scope, $rootScope) {
 
-        $scope.days = time.days;
-        $scope.hours = time.hours;
+        anim.start();
+        //requestAnimFrame(controller);
     };
 
     return {
         restrict: 'A',
-        controller: controller,
+        link: link,
         template: [
             '<div>',
-                '<span>days: {{days}}</span>',
-                '<span>hours: {{hours}}</span>',
-                '<span>minutes: {{minutes}}</span>',
+                '<span>days: {{days}}, </span>',
+                '<span>hours: {{hours}}, </span>',
+                '<span>minutes: {{minutes}}, </span>',
+                '<span>secondes: {{secondes}}</span>',
             '</div>'
         ].join('')
     };
