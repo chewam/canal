@@ -1,12 +1,8 @@
-app.directive('grid', ['dataManager', function(dataManager) {
-
-    //console.log('grid', arguments);
+app.directive('grid', ['dataManager', 'data', function(dataManager, data) {
 
     var el,
         rowCount = 4,
         columnCount = 8;
-        // cellWidth = 150,
-        // cellHeight = 150;
 
     var onCellClick = function(item) {
         //console.log('onCellClick');
@@ -16,71 +12,56 @@ app.directive('grid', ['dataManager', function(dataManager) {
         // }
     };
 
-    var backgroundImage = './img/braquo_400x400.png';
+    var backgroundImage = './img/braquo02-01.jpg';
 
     return {
         restrict: 'A',
 
         template: [
-            // '<div class="cell" ng:repeat="item in items" style="width: {{cellWidth}}%;">{{$index + 1}}</div>'
             '<div class="cell" ng:repeat="item in items" style="width:{{cellWidth}}%;" ng:click="onCellClick(item)">',
                 '<div class="wrap" ng:class="{flip: item.flip}">',
-                    '<div class="front" style="background-image: url({{backgroundImage}}); background-position: -{{item.x}}px -{{item.y}}px;"></div>',
+                    '<div class="front" style="background-image: url({{backgroundImage}}); background-position: -{{item.x}}px -{{item.y}}px; background-size: {{imgWidth}}px {{imgHeight}}px;"></div>',
                     '<div class="back color{{$index + 1}}" >{{item.name}}</div>',
                 '</div>',
             '</div>'
         ].join(''),
 
         controller: function($scope) {
-            //console.log('controller', arguments);
-
-            // var width = window.innerWidth,
-            //     height = window.innerHeight,
-            //     area = width * height / 16,
-            //     b = Math.sqrt(area * width / height),
-            //     a = area / b;
-            //     // side = Math.sqrt(width * height / 16);
-
             $scope.onCellClick = onCellClick;
-            // $scope.backgroundImage = backgroundImage;
-            // $scope.columnWidth = b;
-            // $scope.rowWidth = a;
-
-            // $scope.cellWidth = cellWidth;
-            // $scope.cellHeight = cellHeight;
-
-            dataManager.getItems().success(function(items) {
-                //console.log('getItems', arguments);
-                // imgWidth = grid.width;
-                // imgHeigth = grid.height;
-                var ratio, img = new Image();
-
-                img.src = './img/braquo02-01.jpg';
-
-                img.onload = function() {
-                    ratio = img.width / img.height;
-                    //console.log('img', img.width, img.height, ratio, el.offsetWidth / ratio);
-                };
-
-                for (var i = 0; i < items.length; i++) {
-
-                //     items[i].x = i % columnCount * cellWidth; 
-                //     items[i].y = Math.floor(i / rowCount) * cellHeight;
-                };
-                $scope.items = items;
-            });
+            $scope.backgroundImage = backgroundImage;
         },
 
         link: function(scope, elements) {
             el = elements[0];
-            //console.log('link', arguments);
-            var width = el.offsetWidth,
+            var items, offset,
+                ratio, img = new Image(),
+                width = el.offsetWidth,
                 height = el.offsetHeight,
                 cellWidth = width / columnCount,
                 cellHeight = height / rowCount;
 
             scope.cellWidth = cellWidth * 100 / width;
             scope.cellHeight = cellHeight * 100 / height;
+
+            img.src = backgroundImage;
+
+            img.onload = function() {
+                scope.$apply(function() {
+                    scope.imgWidth = width;
+                    ratio = img.width / img.height;
+                    scope.imgHeight = width / ratio;
+                    items = data.items;
+                    offset = (scope.imgHeight - height) / 2;
+
+                    for (var i = 0; i < items.length; i++) {
+                        items[i].x = i % columnCount * cellWidth;
+                        items[i].y = Math.floor(i / columnCount) * cellHeight;
+                        items[i].y += offset;
+                    };
+
+                    scope.items = items;
+                });
+            };
         }
 
     };

@@ -1,17 +1,38 @@
 var app = angular.module('game', []);
 
 app.constant('gameConfig', {
-    date: '05/30/2014'
+    date: '06/22/2014 12:00'
 });
 
-window.requestAnimFrame = (function(){
-  return  window.requestAnimationFrame       ||
-          window.webkitRequestAnimationFrame ||
-          window.mozRequestAnimationFrame    ||
-          function( callback ){
-            window.setTimeout(callback, 1000 / 60);
-          };
-})();
+app.service('anim', ['timeManager', '$rootScope', function(timeManager, $rootScope) {
+    window.requestAnimFrame = (function(){
+      return  window.requestAnimationFrame       ||
+              window.webkitRequestAnimationFrame ||
+              window.mozRequestAnimationFrame    ||
+              function( callback ){
+                window.setTimeout(callback, 1000 / 60);
+              };
+    })();
+    var an =  function(){
+        requestAnimFrame(an);
+        if (!$rootScope.$$phase){
+            $rootScope.$apply(function(){
+                var time = timeManager.getTime();
+
+                $rootScope.days = time.days;
+                $rootScope.hours = time.hours;
+                $rootScope.minutes = time.minutes;
+                $rootScope.secondes = time.secondes;
+            });
+        }
+    }
+
+    return { start: function() {
+       an();
+    }}
+ }]);
+
+
 
 app.service('dataManager', ['$http', function($http) {
     
@@ -55,22 +76,17 @@ app.service('timeManager', ['gameConfig', function(gameConfig) {
 
 }]);
 
-app.directive('time', ['timeManager', function(timeManager) {
+app.directive('time', ['anim', function( anim) {
 
-    var controller = function($scope) {
-        var time = timeManager.getTime();
+    var link = function($scope, $rootScope) {
 
-        $scope.days = time.days;
-        $scope.hours = time.hours;
-        $scope.minutes = time.minutes;
-        $scope.secondes = time.secondes;
-       
-        requestAnimFrame(controller);
+        anim.start();
+        //requestAnimFrame(controller);
     };
 
     return {
         restrict: 'A',
-        controller: controller,
+        link: link,
         template: [
             '<div>',
                 '<span>days: {{days}}, </span>',

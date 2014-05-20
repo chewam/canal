@@ -1,4 +1,6 @@
 // @baseColor: black;
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:800italic,400);
+
 @baseColor: #111;
 
 html, body {
@@ -10,6 +12,7 @@ body {
     display: -webkit-flex;
     background-color: @baseColor;
     -webkit-flex-direction: column;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .header {
@@ -25,7 +28,6 @@ body {
         font-style: italic;
         line-height: 30px;
         text-transform: uppercase;
-        // text-shadow: 1px 1px 1px rgba(255,255,255,0.7);
     }
 }
 
@@ -42,7 +44,6 @@ body {
         -webkit-align-items: stretch;
         -webkit-flex-wrap: wrap;
         
-        // background-size: cover;
         background-position: center;
         background-size: 100% auto;
         background-repeat: no-repeat;
@@ -61,7 +62,6 @@ body {
 
                 .front {
                     z-index: 2;
-                    // background-color: pink;
                     background-repeat: no-repeat;
                 }
 
