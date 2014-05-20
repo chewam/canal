@@ -1,12 +1,15 @@
-app.directive('grid', ['dataManager', 'data', function(dataManager, data) {
+app.directive('grid', ['dataManager', 'data', '$rootScope', function(dataManager, data, $rootScope) {
 
     var el,
         rowCount = 4,
         columnCount = 8;
 
     var onCellClick = function(item) {
-        //console.log('onCellClick');
         item.flip = !item.flip;
+        $rootScope.currentitemname = item.name;
+        $rootScope.currentitemimg = item.img;
+        var element = angular.element('#modalGift');
+        element.modal('show');
         // if (!item.flip) {
         //     item.flip = true;
         // }

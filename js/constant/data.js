@@ -1,7 +1,8 @@
 app.constant('data', {
 
 	items: [{
-	    "name": "Gift 1"
+	    "name": "Gift 1",
+	    "img":"http://placehold.it/250x250"
 	}, {
 	    "name": "Gift 2"
 	}, {
