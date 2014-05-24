@@ -1,25 +1,26 @@
 app.constant('data', {
 
 	items: [{
-	    "name": "Gift 1",
-	    "img":"http://placehold.it/250x250"
+	    "name": "le coffret de tasses Braco",
+	    "img":"img/items/COFFRET_TASSES_BRAQUO.jpg"
 	}, {
-	    "name": "Gift 2",
-	    "img":"http://placehold.it/230x250"
+	    "name": "une coque Iphone",
+	    "img":"img/items/COQUE_IPHONE.jpg"
 	}, {
-	    "name": "Gift 3",
-	    "img":"http://placehold.it/250x230"
+	    "name": "le kit tablier",
+	    "img":"img/items/KIT_TABLIERS.jpg"
 	}, {
-	    "name": "Gift 4",
-	    "img":"http://placehold.it/250x250"
+	    "name": "la malette Poker",
+	    "img":"img/items/MALETTE_POKER.jpg"
 	}, {
-	    "name": "Gift 5",
-	    "img":"http://placehold.it/250x250"
+	    "name": "le set margarita",
+	    "img":"img/items/SET_MARGARITA.jpg"
 	}, {
-	    "name": "Gift 6",
-	    "img":"http://placehold.it/250x250"
+	    "name": "le Gift 6",
+	    "img":"img/items/CLE_USB_CUBE.jpg"
 	}, {
-	    "name": "Gift 7"
+	    "name": "la cle USB",
+	    "img":"img/items/CLE_USB_CUBE.jpg"
 	}, {
 	    "name": "Gift 8"
 	}, {
