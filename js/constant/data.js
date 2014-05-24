@@ -3,19 +3,26 @@ app.constant('data', {
     '24/05/2014': {
         label: 'Jeu du jour 10',
         items: [{
-            "name": "Gift 1"
+            "name": "le coffret de tasses Braco",
+            "img":"img/items/COFFRET_TASSES_BRAQUO.jpg"
         }, {
-            "name": "Gift 2"
+            "name": "une coque Iphone",
+            "img":"img/items/COQUE_IPHONE.jpg"
         }, {
-            "name": "Gift 3"
+            "name": "le kit tablier",
+            "img":"img/items/KIT_TABLIERS.jpg"
         }, {
-            "name": "Gift 4"
+            "name": "la malette Poker",
+            "img":"img/items/MALETTE_POKER.jpg"
         }, {
-            "name": "Gift 5"
+            "name": "le set margarita",
+            "img":"img/items/SET_MARGARITA.jpg"
         }, {
-            "name": "Gift 6"
+            "name": "le Gift 6",
+            "img":"img/items/CLE_USB_CUBE.jpg"
         }, {
-            "name": "Gift 7"
+            "name": "la cle USB",
+            "img":"img/items/CLE_USB_CUBE.jpg"
         }, {
             "name": "Gift 8"
         }, {

@@ -1,4 +1,4 @@
-app.directive('grid', ['store', function(store) {
+app.directive('grid', ['data', '$rootScope', 'store', function(data, $rootScope, store) {
 
     var el,
         rowCount = 4,
@@ -7,6 +7,10 @@ app.directive('grid', ['store', function(store) {
     var onCellClick = function(item) {
         item.flip = !item.flip;
         store.set(item.index, 7);
+        $rootScope.currentitemname = item.name;
+        $rootScope.currentitemimg = item.img;
+        var element = angular.element('#modalGift');
+        element.modal('show');
         // if (!item.flip) {
         //     item.flip = true;
         // }
