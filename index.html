@@ -5,17 +5,20 @@
 
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
         <link rel="stylesheet/less" type="text/css" href="css/grid.less" />
-        <!-- <link rel="stylesheet/less" type="text/css" href="css/grid-static.less" /> -->
-        <!-- <link rel="stylesheet/less" type="text/css" href="css/index2.less" /> -->
 
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.16/angular-route.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/1.7.0/less.min.js"></script>
 
         <script type="text/javascript" src="js/app.js"></script>
         <script type="text/javascript" src="js/constant/data.js"></script>
+        <script type="text/javascript" src="js/service/TimeManager.js"></script>
+        <script type="text/javascript" src="js/service/anim.js"></script>
+        <script type="text/javascript" src="js/service/store.js"></script>
+        <script type="text/javascript" src="js/directive/login.js"></script>
         <script type="text/javascript" src="js/directive/grid.js"></script>
-        <!-- // <script type="text/javascript" src="js/directive/grid-static.js"></script> -->
-        <!-- // <script type="text/javascript" src="js/index.old.js"></script> -->
+        <script type="text/javascript" src="js/directive/time.js"></script>
+        <script type="text/javascript" src="js/config.js"></script>
     </head>
     <body>
         <div class="header">
@@ -31,10 +34,6 @@
                 </div>
             </div>
         </div>
-        <div class="content">
-            <div id="grid" class="grid" grid></div>
-        </div>
-        <!-- <h1>Grand jeu Canal+ pour Emaby</h1> -->
-        <!-- <div class="grid" gridstatic></div> -->
+        <div class="content" ng:view></div>
     </body>
 </html>

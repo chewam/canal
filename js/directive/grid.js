@@ -1,4 +1,4 @@
-app.directive('grid', ['data', function(data) {
+app.directive('grid', ['store', function(store) {
 
     var el,
         rowCount = 4,
@@ -6,6 +6,7 @@ app.directive('grid', ['data', function(data) {
 
     var onCellClick = function(item) {
         item.flip = !item.flip;
+        store.set(item.index, 7);
         // if (!item.flip) {
         //     item.flip = true;
         // }
@@ -35,7 +36,7 @@ app.directive('grid', ['data', function(data) {
 
         link: function(scope, elements) {
             el = elements[0];
-            var items, offset,
+            var offset, items = [],
                 ratio, img = new Image(),
                 width = el.offsetWidth,
                 height = el.offsetHeight,
@@ -52,13 +53,19 @@ app.directive('grid', ['data', function(data) {
                     scope.imgWidth = width;
                     ratio = img.width / img.height;
                     scope.imgHeight = width / ratio;
-                    items = data.items;
+                    // items = items.get().items;
                     offset = (scope.imgHeight - height) / 2;
 
-                    for (var i = 0; i < items.length; i++) {
-                        items[i].x = i % columnCount * cellWidth;
-                        items[i].y = Math.floor(i / columnCount) * cellHeight;
-                        items[i].y += offset;
+                    for (var i = 0; i < 32; i++) {
+                        items.push({
+                            index: i,
+                            flip: !!store.get(i),
+                            x: i % columnCount * cellWidth,
+                            y: Math.floor(i / columnCount) * cellHeight + offset
+                        });
+                        // items[i].x = i % columnCount * cellWidth;
+                        // items[i].y = Math.floor(i / columnCount) * cellHeight;
+                        // items[i].y += offset;
                     };
 
                     scope.items = items;
