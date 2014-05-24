@@ -1,4 +1,4 @@
-var app = angular.module('game', []);
+var app = angular.module('game', ['ui.bootstrap']);
 
 app.constant('gameConfig', {
     date: '06/22/2014 12:00'

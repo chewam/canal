@@ -1,19 +1,36 @@
 
-app.directive('grid', ['data', '$rootScope', function(data, $rootScope) {
+app.directive('grid', ['data', '$rootScope', '$modal', function(data, $rootScope, $modal) {
 
     var el,
         rowCount = 4,
         columnCount = 8;
 
-    var onCellClick = function(item) {
+    var onCellClick = function(item, test) {console.debug('click');
         item.flip = !item.flip;
         $rootScope.currentitemname = item.name;
         $rootScope.currentitemimg = item.img;
-        var element = angular.element('#modalGift');
-        element.modal('show');
-        // if (!item.flip) {
-        //     item.flip = true;
-        // }
+        $modal.open({
+            template: [
+                '<div ng-controller="modalCtrl">',
+                        '<script type="text/ng-template" id="modalItem.html">',
+                          '<div class="modal-body mine"><div>ggegerg</div>',
+                            '<img class="center-block imgsize" src="{{currentItemImg}}" alt="{{currentItemName}}">',
+                          '</div>',
+                          '<div class="modal-footer">',
+                          '<button class="btn btn-default btn-lg btn-xllg pull-left"  data-dismiss="modal" ng:click="rejouer()">REJOUER</button>',
+                          '<button class="btn btn-lg btn-xllg btn-primary" data-dismiss="modal" ng:click="accepter()">ACCEPTER</button>',
+                          '</div>',
+                               
+                '</div>'
+                ].join(''),
+            size: 'lg',
+            
+          });
+        //$rootScope.fireEvent('modal.show');
+
+        //var element = angular.element('#modalGift');
+        //element.modal('show');
+       
     };
 
     var backgroundImage = './img/braquo02-01.jpg';

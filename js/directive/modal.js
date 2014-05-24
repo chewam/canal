@@ -1,3 +1,43 @@
+app.controller('modalCtrl', [ '$rootScope', '$modal', '$log', function($rootScope, $modal, $log) { 
+        $rootScope.open = function (size) {
+
+          var modalInstance = $modal.open({
+            templateUrl: 'modalItem.html',
+            controller: modal,
+            size: size,
+            resolve: {
+              currentItemImg: function () {
+                return $rootScope.currentItemImg;
+              }
+            }
+          });
+
+          modalInstance.result.then(function (selectedItem) {
+            $rootScope.selected = selectedItem;
+          }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+          });
+        };
+}]);
+/*
+app.controller('modalInstance', [ '$rootScope', '$modal', '$log', function($rootScope, $modal, $log) { 
+          $scope.items = items;
+          $scope.selected = {
+            item: $scope.items[0]
+          };
+
+          $scope.accepter = function () {
+            $modalInstance.close($scope.selected.item);
+          };
+
+          $scope.rejouer = function () {
+            $modalInstance.dismiss('rejouer');
+          };
+}]);
+
+*/
+
+
 app.directive('modal', [ 'data', '$rootScope', function(data, $rootScope) {
 
     var rejouer = function() { //needs to return the current element in the grid
@@ -22,20 +62,19 @@ app.directive('modal', [ 'data', '$rootScope', function(data, $rootScope) {
         restrict: 'A',
 
         template: [
-        '<div class="modal fade" id="modalGift" tabindex="-1" role="dialog" aria-labelledby="ModalTittle" aria-hidden="true">',
-              '<div class="modal-dialog">',
-                '<div class="modal-content">',
+        '<div ng-controller="modalCtrl">',
+                '<script type="text/ng-template" id="modalItem.html">',
                   '<div class="modal-body mine">',
-                    '<img class="center-block imgsize" src="{{currentitemimg}}" alt="{{currentitemname}}">',
+                    '<img class="center-block imgsize" src="{{currentItemImg}}" alt="{{currentItemName}}">',
                   '</div>',
                   '<div class="modal-footer">',
-                  '<button type="button" class="btn btn-default btn-lg btn-xllg pull-left"  data-dismiss="modal" ng:click="rejouer()">REJOUER</button>',
-                  '<button type="button" class="btn btn-lg btn-xllg btn-primary" data-dismiss="modal" ng:click="accepter()">ACCEPTER</button>',
+                  '<button class="btn btn-default btn-lg btn-xllg pull-left"  data-dismiss="modal" ng:click="rejouer()">REJOUER</button>',
+                  '<button class="btn btn-lg btn-xllg btn-primary" data-dismiss="modal" ng:click="accepter()">ACCEPTER</button>',
                   '</div>',
-                '</div>',
-              '</div>',            
+                       
         '</div>'
         ].join(''),
+       
 
         controller: function($scope) {
             $scope.rejouer = rejouer;
