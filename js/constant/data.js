@@ -1,6 +1,6 @@
 app.constant('data', {
 
-    '25/05/2014': {
+    '25/06/2014': {
 
         label: 'Jeu du jour 10',
 
