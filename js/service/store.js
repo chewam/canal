@@ -7,8 +7,7 @@ app.service('store', ['data', function(data) {
     var getGiftArray = function() {
         var date = getDate(),
         gifts = localStorage.getItem(storeGiftId+date);
-
-        return JSON.parse(gifts || '[]');
+        return JSON.parse((gifts === 'undefined') ? '[]' : gifts);
     };
 
     var setGiftArray = function(items) {
@@ -85,7 +84,9 @@ app.service('store', ['data', function(data) {
 
         getAllGift: function() {
             var date = getDate(),
-            items = data[date].items;
+            items = [];
+            if (data[date])
+                items = data[date].items;
             return items;
         },
 
@@ -103,13 +104,17 @@ app.service('store', ['data', function(data) {
 
         getTitle: function() {
             var date = getDate(),
-            label = data[date].label;
+            label;
+            if (data[date])
+                label = data[date].label;
             return label;
         },
 
         getBackGroundImg: function() {
             var date = getDate(),
-            img = data[date].img;
+            img = 'img/braquo.jpg';
+            if (data[date])
+                img = data[date].img;
             return img;
         }
 

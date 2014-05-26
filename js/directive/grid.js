@@ -10,9 +10,11 @@ app.directive('grid', ['$rootScope', 'store', function($rootScope, store) {
             index = 0,
             item = null;
 
+        if (!items)
+            return false;
         if (items.length > 1)
-                index = Math.round(Math.random() * (items.length - 1)) + 1;
-            item = items[index];
+            index = Math.round(Math.random() * (items.length - 1));
+        item = items[index];
         if (item)
             item.index = index;
         return item;
@@ -28,9 +30,12 @@ app.directive('grid', ['$rootScope', 'store', function($rootScope, store) {
         $rootScope.CurrentCell = cell;
         $rootScope.CurrentItem = item;
         $rootScope.CurrentImg = item.img;
+        $rootScope.colorCode = item.colorCode;
         cell.img = item.img;
+        cell.colorCode = item.colorCode;
+        cell.imgSm = item.img.replace('.jpg', '-200x200.jpg');
         var element = angular.element('#modalGift');
-        element.modal('show');
+        element.modal({show: true, backdrop:'static'});
     };
 
     return {
@@ -40,7 +45,7 @@ app.directive('grid', ['$rootScope', 'store', function($rootScope, store) {
             '<div class="cell" ng:repeat="item in items" style="width:{{cellWidth}}%;" ng:click="onCellClick(item)">',
                 '<div class="wrap" ng:class="{flip: item.flip}">',
                     '<div class="front" style="background-image: url({{backgroundImage}}); background-position: -{{item.x}}px -{{item.y}}px; background-size: {{imgWidth}}px {{imgHeight}}px;"></div>',
-                    '<div class="back color{{$index + 1}}" style="background-image: url({{item.img}});">',
+                    '<div class="back" style="border: 10px solid {{item.colorCode}}; background-image: url({{item.imgSm}});">',
                         // '<div>{{item.name}}</div>',
                         // '<div class="glyphicon glyphicon-glass"></div>',
                     '</div>',
@@ -80,6 +85,8 @@ app.directive('grid', ['$rootScope', 'store', function($rootScope, store) {
                         cells.push({
                             index: i,
                             flip: !!item,
+                            colorCode: (item || {}).colorCode,
+                            imgSm: ((item || {}).img ? item.img.replace('.jpg', '-200x200.jpg') : undefined),
                             img: (item || {}).img,
                             x: i % columnCount * cellWidth,
                             y: Math.floor(i / columnCount) * cellHeight + offset
