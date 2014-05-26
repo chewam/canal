@@ -14,6 +14,23 @@ app.service('store', ['data', function(data) {
         localStorage.setItem(storeId, data);
     };
 
+    var getDate = function() {
+        var items, date = new Date(),
+            day = date.getDate(),
+            month = date.getMonth() + 1,
+            year = date.getFullYear();
+
+        if (day < 10) {
+            day = '0' + day;
+        }
+
+        if (month < 10) {
+            month = '0' + month;
+        }
+
+        return [day, month, year].join('/');
+    };
+
     return {
 
         get: function(index) {
@@ -27,26 +44,15 @@ app.service('store', ['data', function(data) {
 
             items[index] = value;
             setItems(items);
+        },
+
+        getData: function() {
+            var date = getDate();
+
+            return data[date];
         }
 
     };
-
-    // var getDate = function() {
-    //     var items, date = new Date(),
-    //         day = date.getDate(),
-    //         month = date.getMonth() + 1,
-    //         year = date.getFullYear();
-
-    //     if (day < 10) {
-    //         day = '0' + day;
-    //     }
-
-    //     if (month < 10) {
-    //         month = '0' + month;
-    //     }
-
-    //     return [day, month, year].join('/');
-    // };
 
     // var load = function() {
     //     var date = getDate(),
