@@ -9,15 +9,16 @@ app.service('anim', ['timeManager', '$rootScope', function(timeManager, $rootSco
             };
     })();
 
+    var mysec;
+
     var anim = function() {
-        var time;
+        var time = timeManager.getTime();
 
         requestAnimFrame(anim);
-
-        if (!$rootScope.$$phase) {
-
+        if (!$rootScope.$$phase && (!(mysec instanceof Date) || new Date().getSeconds() != mysec.getSeconds())) {
+            mysec = new Date();
             $rootScope.$apply(function() {
-                time = timeManager.getTime();
+                
                 $rootScope.timeItems[0].value = time.days;
                 $rootScope.timeItems[1].value = time.hours;
                 $rootScope.timeItems[2].value = time.minutes;

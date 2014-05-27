@@ -4,9 +4,9 @@ app.directive('modal', [ 'data', '$rootScope', 'store', function(data, $rootScop
        $rootScope.CurrentCell.flip = false;
     };
 
-    var accepter = function() { //remove the current from the array
-        // myarray.splice(myarray.indexOf($rootScope.currentitemname), 1);
-        console.debug('accepter');
+    var accepter = function() {
+      store.set($rootScope.CurrentCell.index, $rootScope.CurrentItem.index);
+      store.rmGift($rootScope.CurrentItem);
     };
 
     return {
@@ -17,11 +17,11 @@ app.directive('modal', [ 'data', '$rootScope', 'store', function(data, $rootScop
               '<div class="modal-dialog">',
                 '<div class="modal-content">',
                   '<div class="modal-body mine">',
-                    '<img class="center-block imgsize" src="{{currentitemimg}}" alt="{{currentitemname}}">',
+                    '<img class="center-block imgsize" src="{{CurrentImg}}">',
                   '</div>',
                   '<div class="modal-footer">',
-                  '<button type="button" class="btn btn-default btn-lg btn-xllg pull-left"  data-dismiss="modal" ng:click="rejouer()">REJOUER</button>',
-                  '<button type="button" class="btn btn-lg btn-xllg btn-primary" data-dismiss="modal" ng:click="accepter()">ACCEPTER</button>',
+                  '<button type="button" class="btn btn-default btn-lg btn-xllg pull-left"  data-dismiss="modal" ng:click="rejouer()">-></button>',
+                  '<button type="button" class="btn btn-lg btn-xllg btn-primary" data-dismiss="modal" ng:click="accepter()">X</button>',
                   '</div>',
                 '</div>',
               '</div>',            
