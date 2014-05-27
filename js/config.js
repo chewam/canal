@@ -11,13 +11,16 @@ app.config(['$routeProvider', function($routeProvider) {
     when('/game', {
         template: '<div class="grid" grid></div>',
         resolve: {
-            isLogin: function($q, $timeout) {
-                var rejection = $q.reject('NOT AUTHENTICATED!');
-                // defer.reject('NOT AUTHENTICATED!');
-                console.info('isLogin', arguments, rejection);
-                // return false;
-                // $location.path('/toto');
-                return rejection;
+            isLogin: function($q, $timeout, authManager) {
+                var defer = $q.defer();
+                $timeout(function() {
+                    if (authManager.isLogin()) {
+                        defer.resolve('AUTHENTICATED!');
+                    } else {
+                        defer.reject('NOT AUTHENTICATED!');
+                    }
+                }, 0);
+                return defer.promise;
             }
         }
     }).

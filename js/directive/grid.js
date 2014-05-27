@@ -10,7 +10,6 @@ app.directive('grid', ['data', '$rootScope', 'store', function(data, $rootScope,
             index = Math.round(Math.random() * (items.length - 1)) + 1,
             item = items[index];
 
-        console.log('getRandomItem', data, items, item, index);
         item.index = index;
         return item;
     };
@@ -79,7 +78,6 @@ app.directive('grid', ['data', '$rootScope', 'store', function(data, $rootScope,
 
                     for (var i = 0; i < 32; i++) {
                         item = items[store.get(i)];
-                        console.log('item x', item, store.get(i), (item || {}).img);
                         cells.push({
                             index: i,
                             flip: !!item,
