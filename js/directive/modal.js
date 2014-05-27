@@ -1,21 +1,12 @@
-app.directive('modal', [ 'data', '$rootScope', function(data, $rootScope) {
+app.directive('modal', [ 'data', '$rootScope', 'store', function(data, $rootScope, store) {
 
-    var rejouer = function() { //needs to return the current element in the grid
-        console.debug('rejouer');
-       
-
-        //var randomEl = data.items[Math.floor((Math.random() * 30) + 1)];
-       // $rootScope.currentitemname = randomEl.name;
-        //$rootScope.currentitemimg = randomEl.img;
-        //element.modal('show');
-        // if (!item.flip) {
-        //     item.flip = true;
-        // }
+    var rejouer = function() {
+       $rootScope.CurrentCell.flip = false;
     };
 
     var accepter = function() { //remove the current from the array
         // myarray.splice(myarray.indexOf($rootScope.currentitemname), 1);
- console.debug('accepter');
+        console.debug('accepter');
     };
 
     return {

@@ -15,20 +15,18 @@ app.directive('grid', ['data', '$rootScope', 'store', function(data, $rootScope,
     };
 
     var onCellClick = function(cell) {
-
+        if (cell.flip)
+            return false;
         var item = getRandomItem();
 
         cell.flip = !cell.flip;
         store.set(cell.index, item.index);
-
+        $rootScope.CurrentCell = cell;
         $rootScope.currentitemname = item.name;
         $rootScope.currentitemimg = item.img;
         cell.img = item.img;
         var element = angular.element('#modalGift');
         element.modal('show');
-        // if (!item.flip) {
-        //     item.flip = true;
-        // }
     };
 
     var backgroundImage = './img/braquo02-01.jpg';
