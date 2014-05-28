@@ -3,7 +3,7 @@ app.constant('data', {
     '27/05/2014': {
 
         label: 'Jeu du jour 10',
-
+        img: 'img/background/day1.jpg',
         items: [{
             "name": "le coffret de tasses Braco",
             "img":"img/items/COFFRET_TASSES_BRAQUO.jpg"
@@ -25,12 +25,16 @@ app.constant('data', {
         }, {
             "name": "la cle USB",
             "img":"img/items/CLE_USB_CUBE.jpg"
+        }, {
+            "name": "la cle USB",
+            "img":"img/items/CLE_USB_CUBE.jpg"
         }]
     },
 
     '28/05/2014': {
 
         label: 'Jeu du jour 10',
+        img: 'img/background/day1.jpg',
 
         items: [{
             "name": "le coffret de tasses Braco",
