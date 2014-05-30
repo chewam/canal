@@ -1,6 +1,6 @@
 app.constant('data', {
 
-    '29/05/2014': {
+    '30/05/2014': {
 
         label: 'Jeu du jour 1',
         img: 'img/background/day1.jpg',
