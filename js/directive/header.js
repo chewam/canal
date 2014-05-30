@@ -4,8 +4,8 @@ app.directive('header', ['store', function(store) {
         restrict: 'A',
         link: function(scope) {
             scope.title = store.getTitle();
-        },
-        template: '<h1>{{title}} - Challenge connexion</h1>'
+        },//{{title}} - 
+        template: '<h1>Challenge connexion canal+</h1>'
     };
 
 }]);
