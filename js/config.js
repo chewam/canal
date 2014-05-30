@@ -1,6 +1,6 @@
 app.constant('gameConfig', {
     password: 'braquo',
-    date: '06/22/2014 12:00'
+    date: '06/21/2014 18:00'
 });
 
 app.config(['$routeProvider', function($routeProvider) {
