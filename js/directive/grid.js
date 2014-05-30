@@ -1,6 +1,6 @@
-app.directive('grid', ['$rootScope', 'store', function($rootScope, store) {
+app.directive('grid', ['$rootScope', 'store', '$window', function($rootScope, store, $window) {
 
-    var el,
+    var el, scope,
         rowCount = 4,
         columnCount = 8;
 
@@ -85,20 +85,22 @@ app.directive('grid', ['$rootScope', 'store', function($rootScope, store) {
                 '<div class="wrap" ng:class="{flip: item.flip}">',
                     '<div class="front" style="background-image: url({{backgroundImage}}); background-position: -{{item.x}}px -{{item.y}}px; background-size: {{imgWidth}}px {{imgHeight}}px;"></div>',
                     '<div class="back" style="border: 10px solid {{item.colorCode}}; background-image: url({{item.imgSm}});">',
-                        // '<div>{{item.name}}</div>',
-                        // '<div class="glyphicon glyphicon-glass"></div>',
                     '</div>',
                 '</div>',
             '</div>'
         ].join(''),
 
         controller: function($scope) {
+            scope = $scope;
             $scope.onCellClick = onCellClick;
             $scope.backgroundImage = store.getBackGroundImg();
         },
 
         link: function(scope, elements) {
             el = elements[0];
+            angular.element($window).bind('resize', function() {
+                render();
+            });
             render();
         }
 

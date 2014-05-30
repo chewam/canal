@@ -1,23 +1,3 @@
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:800italic,400);
-@import url(http://fonts.googleapis.com/css?family=Geostar+Fill|Audiowide|Black+Ops+One|Slackey);
-@import url(http://fonts.googleapis.com/css?family=Anonymous+Pro:400,700|VT323);
-
-
-@bgColors: #435a6b, #f19f0f, #0e83cd, #3fa46a, #cd4436, #9e487f, #16a085, #2ac56c, #aab7b7, #30abd5, #ed4e6e, #435a6b, #f19f0f, #0e83cd, #3fa46a, #cd4436, #9e487f, #16a085, #2ac56c, #aab7b7, #30abd5, #ed4e6e, #435a6b, #f19f0f, #0e83cd, #3fa46a, #cd4436, #9e487f, #16a085, #2ac56c, #aab7b7, #30abd5, #ed4e6e;
-
-.loop (@i) when (@i > 0) {
-    @color: extract(@bgColors, @i);
-    .color@{i} {
-        color: darken(@color, 10%);
-        border: 10px solid darken(@color, 10%);
-        background-color: @color;
-        text-shadow: 0 1px 0 lighten(@color, 10%);
-    }
-    .loop (@i - 1);
-}
-.loop (0) {}
-.loop (32);
-
 @baseColor: #111;
 
 html, body {
@@ -35,55 +15,51 @@ body {
 .header {
     height: 100px;
     color: white;
-    padding: 20px 30px 0;
+    padding: 20px 0px 0;
     margin-bottom: 40px;
     background-color: @baseColor;
 
-    h1 {
-        margin: 0 0 0 0;
+    h1, h2 {
+        margin: 0;
         padding: 0;
         font-weight: 800;
-        text-align: right;
-        font-style: italic;
         line-height: 30px;
+        font-style: italic;
         text-transform: uppercase;
+    }
+
+    h2 {
+        color: black;
+        margin-top: 15px;
+        display: inline-block;
+        background-color: white;
+        padding: 5px 20px 5px 10px;
     }
 }
 
 .time {
     color: #666;
-    text-align: right;
+    text-align: left;
     margin-bottom: 5px;
 
     .item {
-        width: 70px;
+        width: 110px;
         text-align: center;
-        margin-left: 20px;
+        margin-left: 10px;
         position: relative;
-        // font-family: 'Audiowide', cursive;
         display: inline-block;
 
         .value {
-            font-size: 3.5em;
-            line-height: 40px;
-            // font-family: 'Anonymous Pro';
-            // font-family: 'Audiowide', cursive;
-            // font-family: 'Slackey', cursive;
-            // font-family: 'Black Ops One', cursive;
-            // font-family: 'Geostar Fill', cursive;
+            font-size: 76px;
+            text-align: center;
+            line-height: 70px;
         }
 
         .name {
-            font-size: .7em;
+            font-size: 15px;
             text-align: center;
             color: darken(#666, 10%);
             text-transform: uppercase;
-
-            // position: absolute;
-            // top: 0;
-            // right: 0;
-            // -webkit-transform-origin: 0 0;
-            // -webkit-transform: rotate(90deg);
         }
     }
 }
@@ -92,9 +68,6 @@ body {
     padding: 20px;
     -webkit-flex: 1;
     display: -webkit-flex;
-    // align-items: center;
-    // justify-content: center;
-    // -webkit-align-items: stretch;
 
     .login {
         margin: auto;
