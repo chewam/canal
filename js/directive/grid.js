@@ -1,6 +1,6 @@
-app.directive('grid', ['$rootScope', 'store', function($rootScope, store) {
+app.directive('grid', ['$rootScope', 'store', '$window', function($rootScope, store, $window) {
 
-    var el,
+    var el, scope,
         rowCount = 4,
         columnCount = 8;
 
@@ -38,6 +38,45 @@ app.directive('grid', ['$rootScope', 'store', function($rootScope, store) {
         element.modal({show: true, backdrop:'static'});
     };
 
+    var render = function() {
+        var offset, items,
+            cells = [], item,
+            ratio, img = new Image(),
+            width = el.offsetWidth,
+            height = el.offsetHeight,
+            cellWidth = width / columnCount,
+            cellHeight = height / rowCount;
+
+        scope.cellWidth = cellWidth * 100 / width;
+        scope.cellHeight = cellHeight * 100 / height;
+
+        img.src = store.getBackGroundImg();
+
+        img.onload = function() {
+            scope.$apply(function() {
+                scope.imgWidth = width;
+                ratio = img.width / img.height;
+                scope.imgHeight = width / ratio;
+                offset = (scope.imgHeight - height) / 2,
+                items = store.getAllGift();
+                for (var i = 0; i < 32; i++) {
+                    item = items[store.get(i)];
+                    cells.push({
+                        index: i,
+                        flip: !!item,
+                        colorCode: (item || {}).colorCode,
+                        imgSm: ((item || {}).img ? item.img.replace('.jpg', '-200x200.jpg') : undefined),
+                        img: (item || {}).img,
+                        x: i % columnCount * cellWidth,
+                        y: Math.floor(i / columnCount) * cellHeight + offset
+                    });
+                };
+
+                scope.items = cells;
+            });
+        };
+    };
+
     return {
         restrict: 'A',
 
@@ -46,59 +85,23 @@ app.directive('grid', ['$rootScope', 'store', function($rootScope, store) {
                 '<div class="wrap" ng:class="{flip: item.flip}">',
                     '<div class="front" style="background-image: url({{backgroundImage}}); background-position: -{{item.x}}px -{{item.y}}px; background-size: {{imgWidth}}px {{imgHeight}}px;"></div>',
                     '<div class="back" style="border: 10px solid {{item.colorCode}}; background-image: url({{item.imgSm}});">',
-                        // '<div>{{item.name}}</div>',
-                        // '<div class="glyphicon glyphicon-glass"></div>',
                     '</div>',
                 '</div>',
             '</div>'
         ].join(''),
 
         controller: function($scope) {
+            scope = $scope;
             $scope.onCellClick = onCellClick;
             $scope.backgroundImage = store.getBackGroundImg();
         },
 
         link: function(scope, elements) {
             el = elements[0];
-            var offset, items,
-                cells = [], item,
-                ratio, img = new Image(),
-                width = el.offsetWidth,
-                height = el.offsetHeight,
-                cellWidth = width / columnCount,
-                cellHeight = height / rowCount;
-
-            scope.cellWidth = cellWidth * 100 / width;
-            scope.cellHeight = cellHeight * 100 / height;
-
-            img.src = store.getBackGroundImg();
-
-            img.onload = function() {
-                scope.$apply(function() {
-                    scope.imgWidth = width;
-                    ratio = img.width / img.height;
-                    scope.imgHeight = width / ratio;
-                    offset = (scope.imgHeight - height) / 2,
-                    items = store.getAllGift();
-                    for (var i = 0; i < 32; i++) {
-                        item = items[store.get(i)];
-                        cells.push({
-                            index: i,
-                            flip: !!item,
-                            colorCode: (item || {}).colorCode,
-                            imgSm: ((item || {}).img ? item.img.replace('.jpg', '-200x200.jpg') : undefined),
-                            img: (item || {}).img,
-                            x: i % columnCount * cellWidth,
-                            y: Math.floor(i / columnCount) * cellHeight + offset
-                        });
-                        // items[i].x = i % columnCount * cellWidth;
-                        // items[i].y = Math.floor(i / columnCount) * cellHeight;
-                        // items[i].y += offset;
-                    };
-
-                    scope.items = cells;
-                });
-            };
+            angular.element($window).bind('resize', function() {
+                render();
+            });
+            render();
         }
 
     };

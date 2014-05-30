@@ -5,7 +5,7 @@ app.directive('header', ['store', function(store) {
         link: function(scope) {
             scope.title = store.getTitle();
         },//{{title}} - 
-        template: '<h1>Challenge connexion canal+</h1>'
+        template: 'challenge connexion'
     };
 
 }]);
