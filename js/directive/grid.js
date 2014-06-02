@@ -6,7 +6,7 @@ app.directive('grid', ['$rootScope', 'store', '$window', function($rootScope, st
 
     var getRandomItem = function() {
         var data = store.getGift(),
-            items = data.items,
+            items = data,
             index = 0,
             item = null;
 
