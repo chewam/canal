@@ -35,7 +35,7 @@ app.directive('grid', ['$rootScope', 'store', '$window', function($rootScope, st
         cell.colorCode = item.colorCode;
         cell.imgSm = item.img.replace('.jpg', '-200x200.jpg');
         var element = angular.element('#modalGift');
-        element.modal({show: true, backdrop:'static'});
+        element.modal({show: true, keyboard:false, backdrop:'static'});
     };
 
     var render = function() {

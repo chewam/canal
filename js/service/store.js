@@ -20,48 +20,38 @@ app.service('store', ['data', function(data) {
     };
 
     var getItems = function() {
-        // var date = getDate(),
-        var data = localStorage.getItem(storeGridId);
-        
+        var date = getDate(), data = localStorage.getItem(storeGridId+date);
         return JSON.parse(data || '[]');
     };
 
     var setItems = function(items) {
-        // var date = getDate(),
-        var data = JSON.stringify(items);
+        var date = getDate(), data = JSON.stringify(items);
 
-        localStorage.setItem(storeGridId, data);
+        localStorage.setItem(storeGridId+date, data);
     };
 
-    // var getDate = function() {
-    //     var items, date = new Date(),
-    //         day = date.getDate(),
-    //         month = date.getMonth() + 1,
-    //         year = date.getFullYear();
+    var getDate = function() {
+        var items, date = new Date(),
+            day = date.getDate(),
+            month = date.getMonth() + 1,
+            year = date.getFullYear();
 
-    //     if (day < 10) {
-    //         day = '0' + day;
-    //     }
+        if (day < 10) {
+            day = '0' + day;
+        }
 
-    //     if (month < 10) {
-    //         month = '0' + month;
-    //     }
+        if (month < 10) {
+            month = '0' + month;
+        }
 
-    //     return [day, month, year].join('/');
-    // };
+        return [day, month, year].join('/');
+    };
 
     var checkIsDoInit = function(data){
-        console.warn('checkIsDoInit');
-        setGiftArray(data.items);
+        if (!getGiftArray()) {
+            setGiftArray(data.items);
+        }
         return true;
-        // var date = getDate();
-
-        // if (lastDate != date) {
-        //     lastDate = date;
-        //     setGiftArray(data[date]);
-        //     return true;
-        // } else return false;
-        
     };
 
     return {
@@ -118,14 +108,8 @@ app.service('store', ['data', function(data) {
         },
 
         getBackGroundImg: function() {
-            return 'img/braquo.jpg';
-
-            // var date = getDate(),
-            //     img = 'img/braquo.jpg';
-
-            // if (data[date])
-            //     img = data[date].img;
-            // return img;
+            var index = (Math.round(Math.random() * 18));
+            return 'img/background/' + index + '.jpg';
         }
 
     };
