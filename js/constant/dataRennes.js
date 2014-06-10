@@ -724,17 +724,17 @@ app.constant('data', {
            "img":"img/items/CasquePliable.jpg",
            "colorCode" : "#0000CC"
        },{
-           "name": "KIT_TABLIERS",
-           "img":"img/items/KIT_TABLIERS.jpg",
-           "colorCode" : "#990100"
+           "name": "KitConnexion",
+            "img":"img/items/KitConnexion.jpg",
+            "colorCode" : "#FF6600"
        },{
-           "name": "KIT_TABLIERS",
-           "img":"img/items/KIT_TABLIERS.jpg",
-           "colorCode" : "#990100"
+           "name": "KitConnexion",
+            "img":"img/items/KitConnexion.jpg",
+            "colorCode" : "#FF6600"
        },{
-           "name": "KIT_TABLIERS",
-           "img":"img/items/KIT_TABLIERS.jpg",
-           "colorCode" : "#990100"
+           "name": "KitConnexion",
+            "img":"img/items/KitConnexion.jpg",
+            "colorCode" : "#FF6600"
        },{
            "name": "ChargeurPortable",
            "img":"img/items/ChargeurPortable.jpg",
@@ -799,17 +799,17 @@ app.constant('data', {
            "img":"img/items/CasquePliable.jpg",
            "colorCode" : "#0000CC"
        },{
-           "name": "KIT_TABLIERS",
-           "img":"img/items/KIT_TABLIERS.jpg",
-           "colorCode" : "#990100"
+           "name": "KitConnexion",
+            "img":"img/items/KitConnexion.jpg",
+            "colorCode" : "#FF6600"
        },{
-           "name": "KIT_TABLIERS",
-           "img":"img/items/KIT_TABLIERS.jpg",
-           "colorCode" : "#990100"
+           "name": "KitConnexion",
+            "img":"img/items/KitConnexion.jpg",
+            "colorCode" : "#FF6600"
        },{
-           "name": "KIT_TABLIERS",
-           "img":"img/items/KIT_TABLIERS.jpg",
-           "colorCode" : "#990100"
+           "name": "KitConnexion",
+            "img":"img/items/KitConnexion.jpg",
+            "colorCode" : "#FF6600"
        },{
            "name": "ChargeurPortable",
            "img":"img/items/ChargeurPortable.jpg",
@@ -874,17 +874,17 @@ app.constant('data', {
            "img":"img/items/CasquePliable.jpg",
            "colorCode" : "#0000CC"
        },{
-           "name": "KIT_TABLIERS",
-           "img":"img/items/KIT_TABLIERS.jpg",
-           "colorCode" : "#990100"
+           "name": "KitConnexion",
+            "img":"img/items/KitConnexion.jpg",
+            "colorCode" : "#FF6600"
        },{
-           "name": "KIT_TABLIERS",
-           "img":"img/items/KIT_TABLIERS.jpg",
-           "colorCode" : "#990100"
+           "name": "KitConnexion",
+            "img":"img/items/KitConnexion.jpg",
+            "colorCode" : "#FF6600"
        },{
-           "name": "KIT_TABLIERS",
-           "img":"img/items/KIT_TABLIERS.jpg",
-           "colorCode" : "#990100"
+           "name": "KitConnexion",
+            "img":"img/items/KitConnexion.jpg",
+            "colorCode" : "#FF6600"
        },{
            "name": "ChargeurPortable",
            "img":"img/items/ChargeurPortable.jpg",
@@ -949,13 +949,13 @@ app.constant('data', {
            "img":"img/items/CasquePliable.jpg",
            "colorCode" : "#0000CC"
        },{
-           "name": "KIT_TABLIERS",
-           "img":"img/items/KIT_TABLIERS.jpg",
-           "colorCode" : "#990100"
+          "name": "KitConnexion",
+            "img":"img/items/KitConnexion.jpg",
+            "colorCode" : "#FF6600"
        },{
-           "name": "KIT_TABLIERS",
-           "img":"img/items/KIT_TABLIERS.jpg",
-           "colorCode" : "#990100"
+           "name": "KitConnexion",
+            "img":"img/items/KitConnexion.jpg",
+            "colorCode" : "#FF6600"
        },{
            "name": "ChargeurPortable",
            "img":"img/items/ChargeurPortable.jpg",
@@ -1024,17 +1024,17 @@ app.constant('data', {
            "img":"img/items/CasquePliable.jpg",
            "colorCode" : "#0000CC"
        },{
-           "name": "KIT_TABLIERS",
-           "img":"img/items/KIT_TABLIERS.jpg",
-           "colorCode" : "#990100"
+           "name": "KitConnexion",
+            "img":"img/items/KitConnexion.jpg",
+            "colorCode" : "#FF6600"
        },{
-           "name": "KIT_TABLIERS",
-           "img":"img/items/KIT_TABLIERS.jpg",
-           "colorCode" : "#990100"
+           "name": "KitConnexion",
+            "img":"img/items/KitConnexion.jpg",
+            "colorCode" : "#FF6600"
        },{
-           "name": "KIT_TABLIERS",
-           "img":"img/items/KIT_TABLIERS.jpg",
-           "colorCode" : "#990100"
+           "name": "KitConnexion",
+            "img":"img/items/KitConnexion.jpg",
+            "colorCode" : "#FF6600"
        },{
            "name": "ChargeurPortable",
            "img":"img/items/ChargeurPortable.jpg",
@@ -1103,17 +1103,17 @@ app.constant('data', {
            "img":"img/items/CasquePliable.jpg",
            "colorCode" : "#0000CC"
        },{
-           "name": "KIT_TABLIERS",
-           "img":"img/items/KIT_TABLIERS.jpg",
-           "colorCode" : "#990100"
+           "name": "KitConnexion",
+            "img":"img/items/KitConnexion.jpg",
+            "colorCode" : "#FF6600"
        },{
-           "name": "KIT_TABLIERS",
-           "img":"img/items/KIT_TABLIERS.jpg",
-           "colorCode" : "#990100"
+           "name": "KitConnexion",
+            "img":"img/items/KitConnexion.jpg",
+            "colorCode" : "#FF6600"
        },{
-           "name": "KIT_TABLIERS",
-           "img":"img/items/KIT_TABLIERS.jpg",
-           "colorCode" : "#990100"
+           "name": "KitConnexion",
+            "img":"img/items/KitConnexion.jpg",
+            "colorCode" : "#FF6600"
        },{
            "name": "ChargeurPortable",
            "img":"img/items/ChargeurPortable.jpg",
