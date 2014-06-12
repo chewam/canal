@@ -1,7 +1,7 @@
 app.service('store', ['data', function(data) {
 
-    var storeGridId = 'canal-store-table';
-    var storeGiftId = 'canal-store-gifts';
+    var storeGridId = 'canal-store-table-new';
+    var storeGiftId = 'canal-store-gifts-new';
     var lastDate;
 
     var getGiftArray = function() {
